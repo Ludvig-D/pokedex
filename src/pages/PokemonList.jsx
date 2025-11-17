@@ -1,0 +1,67 @@
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { useState, useEffect, useRef } from 'react';
+
+import PokemonListItem from '../PokemonListItem';
+
+export default function PokemonList() {
+  const [pokemonFullData, setPokemonFullData] = useState([]);
+  const hasFetched = useRef(false);
+
+  useEffect(() => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
+
+    // fetch('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0')
+    //   .then((response) => response.json())
+    //   .then((data) => setPokemonList((prev) => [...prev, ...data.results]));
+
+    async function fetchFirstPokemons() {
+      try {
+        for (let id = 1; id <= 42; id++) {
+          let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+          let data = await response.json();
+          setPokemonFullData((prev) => [...prev, data]);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    fetchFirstPokemons();
+  }, []);
+
+  const fetchData = async () => {
+    if (!hasFetched.current) return;
+
+    try {
+      for (
+        let id = pokemonFullData.length + 1;
+        id <= pokemonFullData.length + 6;
+        id++
+      ) {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+        let data = await response.json();
+        setPokemonFullData((prev) => [...prev, data]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return (
+    <>
+      <ul>
+        <InfiniteScroll
+          dataLength={pokemonFullData.length}
+          next={fetchData}
+          className="infi"
+          hasMore={true}
+          loader={<h4>Loading...</h4>}
+        >
+          {pokemonFullData.map((pokemon, id) => (
+            <PokemonListItem key={id} pokemon={pokemon} />
+          ))}
+        </InfiniteScroll>
+      </ul>
+    </>
+  );
+}
