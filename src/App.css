@@ -8,6 +8,9 @@
 
 ul {
   list-style: none;
+}
+
+.infi {
   display: grid;
   border: 2px solid red;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
