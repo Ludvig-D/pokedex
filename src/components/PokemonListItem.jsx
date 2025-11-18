@@ -5,6 +5,7 @@ export default function PokemonListItem({ pokemon }) {
   const toNextComponent = () => {
     navigate(`./${pokemon.id}`, { state: { pokemon: pokemon } });
   };
+  console.log(pokemon.id);
 
   return (
     <li onClick={toNextComponent} className="pokeListItem">

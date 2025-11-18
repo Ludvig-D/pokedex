@@ -12,7 +12,21 @@ export default function PokemonItem() {
       .then((res) => res.json())
       .then((data) => setPoke(data));
   }
-  console.log(poke);
+
+  const imageArray = [];
+  function imagePusher(images) {
+    Object.entries(images).map(([key, value]) => {
+      if (typeof value === 'object' && value !== null) {
+        return imagePusher(value);
+      } else if (value === null) {
+        return;
+      }
+      return imageArray.push({ key, value });
+    });
+  }
+
+  // imagePusher(poke.sprites);
+
   return (
     <>
       <div>
