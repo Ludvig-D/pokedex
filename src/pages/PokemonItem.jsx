@@ -12,11 +12,30 @@ export default function PokemonItem() {
       .then((res) => res.json())
       .then((data) => setPoke(data));
   }
+  console.log(poke);
   return (
     <>
       <div>
         <img src={poke.sprites.front_default} alt="pokemons image" />
         <p>{poke.name}</p>
+        <ul>
+          {poke.stats.map((stat) => (
+            <li key={stat.stat.name}>
+              {stat.base_stat} {stat.stat.name}
+            </li>
+          ))}
+          <li key={poke.weight}>
+            Weight {poke.weight / 10} kg ({(poke.weight / 10) * 2.205} lbs)
+          </li>
+          <li key={poke.height}>
+            Height {poke.height / 10} m ({(poke.height / 10) * 3.28} inches)
+          </li>
+        </ul>
+        <ul>
+          {poke.types.map((type) => (
+            <li key={type.slot}>Type: {type.type.name}</li>
+          ))}
+        </ul>
       </div>
     </>
   );

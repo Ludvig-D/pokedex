@@ -7,7 +7,7 @@ export default function PokemonListItem({ pokemon }) {
   };
 
   return (
-    <li onClick={toNextComponent}>
+    <li onClick={toNextComponent} className="pokeListItem">
       <img src={pokemon.sprites.front_default} alt="pokemons image" />
       <p>{pokemon.name}</p>
     </li>
