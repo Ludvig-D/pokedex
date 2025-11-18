@@ -2,6 +2,7 @@ import { Routes, Route, NavLink, BrowserRouter } from 'react-router-dom';
 import './App.css';
 import PokemonList from './pages/PokemonList';
 import PokemonItem from './pages/PokemonItem';
+import HomePage from './components/HomePage';
 
 function App() {
   // const [pokemonList, setPokemonList] = useState([]);
@@ -15,6 +16,7 @@ function App() {
           <NavLink to={'pokemons'}>All pokemons</NavLink>
         </nav>
         <Routes>
+          <Route path="/" element={<HomePage />} />
           <Route path="pokemons" element={<PokemonList />} />
           <Route path="pokemons/:id" element={<PokemonItem />} />
         </Routes>

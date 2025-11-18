@@ -23,14 +23,15 @@ ul {
   border: 2px solid greenyellow;
   text-align: center;
   padding: 1rem;
-  width: 15rem;
-  height: 15rem;
+  width: 12vw;
+  height: auto;
 }
 
 .pokeListItem img {
-  width: 12rem;
+  width: 8vw;
 }
 
 .pokeListItem p {
   text-transform: capitalize;
+  font-size: clamp(0.5rem, 1rem, 10vw);
 }
