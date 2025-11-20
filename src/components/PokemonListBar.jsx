@@ -3,7 +3,12 @@ export default function PokemonListBar() {
     <div>
       <p>search</p>
       <p>types</p>
-      <p>order</p>
+      <select defaultValue={'accending'}>
+        <option value="accending">Accending ids</option>
+        <option value="deccending">Deccending ids</option>
+        <option value="az">A-Z</option>
+        <option value="za">Z-A</option>
+      </select>
     </div>
   );
 }

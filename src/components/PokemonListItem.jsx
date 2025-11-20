@@ -23,7 +23,10 @@ export default function PokemonListItem({ pokemon }) {
               ))}
             </div>
           </div>
-          <img src={pokemon.sprites.front_default} alt="pokemons image" />
+          <img
+            src={pokemon.sprites.front_default}
+            alt={`${pokemon.name}'s image`}
+          />
           <p className="pokemon-name">{pokemon.name}</p>
         </>
       )}

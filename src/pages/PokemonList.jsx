@@ -9,18 +9,27 @@ import PokemonListBar from '../components/PokemonListBar';
 export default function PokemonList() {
   const [masterPokemonList, setMasterPokemonList] = useState([]);
   const [detailedPokemonList, setDetailedPokemonList] = useState([]);
+  const [visibleCount, setVisibleCount] = useState(24);
   const [currentList, setCurrentList] = useState([
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
     22, 23, 24,
   ]);
+  const [hiddenList, setHiddenList] = useState([]);
+
   const hasFetched = useRef(false);
+
+  //Todo
+  //1. Make fitler option for revers id
+  //2. Make filter for A-Z and z-A
+  //3. Style pokemon item
+  //4. Finish up photo slide show
 
   useEffect(() => {
     if (hasFetched.current) return;
     hasFetched.current = true;
 
     function createMasterList() {
-      fetch('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0')
+      fetch('https://pokeapi.co/api/v2/pokemon?limit=1328&offset=0')
         .then((response) => response.json())
         .then((allData) => {
           allData.results.map((data) => {
@@ -32,6 +41,14 @@ export default function PokemonList() {
     }
     createMasterList();
   }, []);
+
+  useEffect(() => {
+    (function currentListFiller() {
+      masterPokemonList.map((list) =>
+        setHiddenList((prev) => [...prev, list.id])
+      );
+    })();
+  }, [masterPokemonList]);
 
   useEffect(() => {
     const lazyLoader = (idArray) => {
@@ -52,13 +69,16 @@ export default function PokemonList() {
     lazyLoader(currentList);
   }, [currentList, detailedPokemonList]);
 
-  function increase() {
-    let num = 6;
-
-    while (num > 0) {
-      setCurrentList((prev) => [...prev, prev.length + 1]);
-      num--;
+  useEffect(() => {
+    function test() {
+      setCurrentList(() => hiddenList.slice(0, visibleCount));
     }
+    test();
+  }, [hiddenList, visibleCount]);
+
+  function increase() {
+    if (currentList.length > visibleCount) return;
+    setVisibleCount((prev) => prev + 6);
   }
 
   return (
