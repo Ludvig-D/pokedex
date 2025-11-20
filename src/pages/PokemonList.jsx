@@ -20,6 +20,8 @@ export default function PokemonList() {
 
     async function fetchFirstPokemons() {
       try {
+        console.log('Fetching data');
+
         for (let id = 1; id <= 42; id++) {
           let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
           let data = await response.json();

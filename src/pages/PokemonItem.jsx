@@ -10,6 +10,8 @@ export default function PokemonItem() {
   const [poke, setPoke] = useState(pokemon || '');
   if (!pokemon) {
     let id = params.id;
+    console.log('Fetching data');
+
     fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
       .then((res) => res.json())
       .then((data) => setPoke(data));

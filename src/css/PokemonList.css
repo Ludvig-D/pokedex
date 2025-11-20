@@ -12,11 +12,13 @@ ul {
 }
 
 .pokeListItem {
-  border: 2px solid greenyellow;
+  border: 2px solid #444a4d;
+  border-radius: 5px;
   text-align: center;
   padding: 1rem;
   width: 12vw;
   height: auto;
+  background-color: #2d3032;
 }
 
 .pokeListItem img {
@@ -26,4 +28,11 @@ ul {
 .pokeListItem p {
   text-transform: capitalize;
   font-size: clamp(0.5rem, 1rem, 10vw);
+  font-weight: bold;
+}
+
+.icon-div {
+  display: flex;
+  justify-content: end;
+  gap: 0.1rem;
 }
