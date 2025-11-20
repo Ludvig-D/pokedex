@@ -7,9 +7,10 @@ import PokemonListItem from '../components/PokemonListItem';
 
 export default function PokemonList() {
   const [masterPokemonList, setMasterPokemonList] = useState([]);
-  const [pokemonFullData, setPokemonFullData] = useState([]);
+  const [detailedPokemonList, setDetailedPokemonList] = useState([]);
   const [currentList, setCurrentList] = useState([
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+    22, 23, 24,
   ]);
   const hasFetched = useRef(false);
 
@@ -26,49 +27,36 @@ export default function PokemonList() {
             setMasterPokemonList((prev) => [...prev, { id: id, ...data }]);
           });
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.error(err));
     }
     createMasterList();
-
-    async function fetchFirstPokemons() {
-      try {
-        console.log('Fetching data');
-
-        for (let id = 1; id <= 42; id++) {
-          let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
-          let data = await response.json();
-          setPokemonFullData((prev) => [...prev, data]);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    fetchFirstPokemons();
   }, []);
 
-  const fetchData = async () => {
-    if (!hasFetched.current) return;
-
-    try {
-      for (
-        let id = pokemonFullData.length + 1;
-        id <= pokemonFullData.length + 6;
-        id++
-      ) {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
-        let data = await response.json();
-        setPokemonFullData((prev) => [...prev, { data }]);
+  useEffect(() => {
+    const lazyLoader = (idArray) => {
+      if (!Array.isArray(idArray))
+        throw new Error(`lazyLoader input isn't a array`);
+      try {
+        idArray.forEach(async (id) => {
+          if (detailedPokemonList && detailedPokemonList[id]) return;
+          let res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+          let data = await res.json();
+          setDetailedPokemonList((prev) => ({ ...prev, [id]: data }));
+        });
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    };
 
-  function lazyLoader(idArray) {
-    try {
-      idArray.forEach((id) => {});
-    } catch (error) {
-      console.log(error);
+    lazyLoader(currentList);
+  }, [currentList, detailedPokemonList]);
+
+  function increase() {
+    let num = 6;
+
+    while (num > 0) {
+      setCurrentList((prev) => [...prev, prev.length + 1]);
+      num--;
     }
   }
 
@@ -76,14 +64,14 @@ export default function PokemonList() {
     <>
       <ul>
         <InfiniteScroll
-          dataLength={pokemonFullData.length}
-          next={fetchData}
+          dataLength={currentList.length}
+          next={increase}
           className="infi"
           hasMore={true}
           loader={<h4>Loading...</h4>}
         >
-          {pokemonFullData.map((pokemon, id) => (
-            <PokemonListItem key={id} pokemon={pokemon} />
+          {currentList.map((id) => (
+            <PokemonListItem key={id} pokemon={detailedPokemonList[id]} />
           ))}
         </InfiniteScroll>
       </ul>
