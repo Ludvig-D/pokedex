@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import '../css/PokemonList.css';
 
 import PokemonListItem from '../components/PokemonListItem';
+import PokemonListBar from '../components/PokemonListBar';
 
 export default function PokemonList() {
   const [masterPokemonList, setMasterPokemonList] = useState([]);
@@ -62,6 +63,7 @@ export default function PokemonList() {
 
   return (
     <>
+      <PokemonListBar></PokemonListBar>
       <ul>
         <InfiniteScroll
           dataLength={currentList.length}
