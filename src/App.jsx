@@ -1,12 +1,10 @@
 import { Routes, Route, NavLink, BrowserRouter } from 'react-router-dom';
-import './App.css';
+import './css/App.css';
 import PokemonList from './pages/PokemonList';
 import PokemonItem from './pages/PokemonItem';
 import HomePage from './components/HomePage';
 
 function App() {
-  // const [pokemonList, setPokemonList] = useState([]);
-
   return (
     <>
       <h1>Pokedex</h1>

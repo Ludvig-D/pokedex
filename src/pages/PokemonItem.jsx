@@ -1,6 +1,8 @@
 import { useLocation, useParams } from 'react-router-dom';
 import { useState } from 'react';
 
+import '../css/icons.css';
+
 export default function PokemonItem() {
   const location = useLocation();
   const params = useParams();
@@ -27,6 +29,8 @@ export default function PokemonItem() {
 
   // imagePusher(poke.sprites);
 
+  console.log(pokemon);
+
   return (
     <>
       <div>
@@ -47,7 +51,9 @@ export default function PokemonItem() {
         </ul>
         <ul>
           {poke.types.map((type) => (
-            <li key={type.slot}>Type: {type.type.name}</li>
+            <li className={`type-icon type-${type.type.name}`} key={type.slot}>
+              {type.type.name}
+            </li>
           ))}
         </ul>
       </div>

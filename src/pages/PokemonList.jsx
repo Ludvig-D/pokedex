@@ -1,9 +1,12 @@
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useState, useEffect, useRef } from 'react';
 
+import '../css/PokemonList.css';
+
 import PokemonListItem from '../components/PokemonListItem';
 
 export default function PokemonList() {
+  // const [pokemonList, setPokemonList] = useState([]);
   const [pokemonFullData, setPokemonFullData] = useState([]);
   const hasFetched = useRef(false);
 
