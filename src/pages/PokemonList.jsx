@@ -8,6 +8,9 @@ import PokemonListItem from '../components/PokemonListItem';
 export default function PokemonList() {
   const [masterPokemonList, setMasterPokemonList] = useState([]);
   const [pokemonFullData, setPokemonFullData] = useState([]);
+  const [currentList, setCurrentList] = useState([
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+  ]);
   const hasFetched = useRef(false);
 
   useEffect(() => {
@@ -54,12 +57,21 @@ export default function PokemonList() {
       ) {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
         let data = await response.json();
-        setPokemonFullData((prev) => [...prev, data]);
+        setPokemonFullData((prev) => [...prev, { data }]);
       }
     } catch (error) {
       console.log(error);
     }
   };
+
+  function lazyLoader(idArray) {
+    try {
+      idArray.forEach((id) => {});
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <>
       <ul>
