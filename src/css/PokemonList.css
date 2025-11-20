@@ -4,7 +4,6 @@ ul {
 
 .infi {
   display: grid;
-  border: 2px solid red;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: auto;
   gap: 1em;

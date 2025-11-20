@@ -6,7 +6,7 @@ import '../css/PokemonList.css';
 import PokemonListItem from '../components/PokemonListItem';
 
 export default function PokemonList() {
-  // const [pokemonList, setPokemonList] = useState([]);
+  const [masterPokemonList, setMasterPokemonList] = useState([]);
   const [pokemonFullData, setPokemonFullData] = useState([]);
   const hasFetched = useRef(false);
 
@@ -14,9 +14,18 @@ export default function PokemonList() {
     if (hasFetched.current) return;
     hasFetched.current = true;
 
-    // fetch('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0')
-    //   .then((response) => response.json())
-    //   .then((data) => setPokemonList((prev) => [...prev, ...data.results]));
+    function createMasterList() {
+      fetch('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0')
+        .then((response) => response.json())
+        .then((allData) => {
+          allData.results.map((data) => {
+            let id = data.url.split('/')[6];
+            setMasterPokemonList((prev) => [...prev, { id: id, ...data }]);
+          });
+        })
+        .catch((err) => console.log(err));
+    }
+    createMasterList();
 
     async function fetchFirstPokemons() {
       try {
@@ -31,7 +40,6 @@ export default function PokemonList() {
         console.log(err);
       }
     }
-
     fetchFirstPokemons();
   }, []);
 

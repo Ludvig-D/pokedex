@@ -10,7 +10,9 @@ export default function PokemonListItem({ pokemon }) {
     <li onClick={toNextComponent} className="pokeListItem">
       <div className="icon-div">
         {pokemon.types.map((type) => (
-          <p className={`type-icon type-${type.type.name}`}>{type.type.name}</p>
+          <p key={type.slot} className={`type-icon type-${type.type.name}`}>
+            {type.type.name}
+          </p>
         ))}
       </div>
       <img src={pokemon.sprites.front_default} alt="pokemons image" />
