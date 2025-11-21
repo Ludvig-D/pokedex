@@ -1,5 +1,5 @@
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 import '../css/PokemonList.css';
 
@@ -9,20 +9,20 @@ import PokemonListBar from '../components/PokemonListBar';
 export default function PokemonList() {
   const [masterPokemonList, setMasterPokemonList] = useState([]);
   const [detailedPokemonList, setDetailedPokemonList] = useState([]);
-  const [visibleCount, setVisibleCount] = useState(24);
+  const [visibleCount, setVisibleCount] = useState(31);
   const [currentList, setCurrentList] = useState([
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
     22, 23, 24,
   ]);
   const [hiddenList, setHiddenList] = useState([]);
+  const [trigger, setTrigger] = useState('');
 
   const hasFetched = useRef(false);
 
   //Todo
-  //1. Make fitler option for revers id
-  //2. Make filter for A-Z and z-A
-  //3. Style pokemon item
-  //4. Finish up photo slide show
+  //1. Make filter for A-Z and z-A
+  //2. Style pokemon item
+  //3. Finish up photo slide show
 
   useEffect(() => {
     if (hasFetched.current) return;
@@ -35,20 +35,13 @@ export default function PokemonList() {
           allData.results.map((data) => {
             let id = data.url.split('/')[6];
             setMasterPokemonList((prev) => [...prev, { id: id, ...data }]);
+            setHiddenList((prev) => [...prev, id]);
           });
         })
         .catch((err) => console.error(err));
     }
     createMasterList();
   }, []);
-
-  useEffect(() => {
-    (function currentListFiller() {
-      masterPokemonList.map((list) =>
-        setHiddenList((prev) => [...prev, list.id])
-      );
-    })();
-  }, [masterPokemonList]);
 
   useEffect(() => {
     const lazyLoader = (idArray) => {
@@ -70,20 +63,32 @@ export default function PokemonList() {
   }, [currentList, detailedPokemonList]);
 
   useEffect(() => {
-    function test() {
+    function increaseCurrentList() {
       setCurrentList(() => hiddenList.slice(0, visibleCount));
     }
-    test();
-  }, [hiddenList, visibleCount]);
+    increaseCurrentList();
+  }, [hiddenList, visibleCount, trigger]);
 
   function increase() {
     if (currentList.length > visibleCount) return;
     setVisibleCount((prev) => prev + 6);
   }
 
+  const whatShows = useCallback((value) => {
+    if (value === 'ascending') {
+      setHiddenList((prev) => prev.sort((a, b) => a - b));
+      setTrigger(crypto.randomUUID());
+    } else if (value === 'descending') {
+      setHiddenList((prev) => {
+        return prev.sort((a, b) => parseInt(b) - parseInt(a));
+      });
+      setTrigger(crypto.randomUUID());
+    }
+  }, []);
+
   return (
     <>
-      <PokemonListBar></PokemonListBar>
+      <PokemonListBar whatshows={whatShows} />
       <ul>
         <InfiniteScroll
           dataLength={currentList.length}
