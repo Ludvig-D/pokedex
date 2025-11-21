@@ -10,19 +10,15 @@ export default function PokemonList() {
   const [masterPokemonList, setMasterPokemonList] = useState([]);
   const [detailedPokemonList, setDetailedPokemonList] = useState([]);
   const [visibleCount, setVisibleCount] = useState(31);
-  const [currentList, setCurrentList] = useState([
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-    22, 23, 24,
-  ]);
+  const [currentList, setCurrentList] = useState([]);
   const [hiddenList, setHiddenList] = useState([]);
   const [trigger, setTrigger] = useState('');
 
   const hasFetched = useRef(false);
 
   //Todo
-  //1. Make filter for A-Z and z-A
-  //2. Style pokemon item
-  //3. Finish up photo slide show
+  //1. Style pokemon item
+  //2. Finish up photo slide show
 
   useEffect(() => {
     if (hasFetched.current) return;

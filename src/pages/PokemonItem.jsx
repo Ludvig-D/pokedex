@@ -1,7 +1,9 @@
 import { useLocation, useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import '../css/icons.css';
+
+import SlideShow from '../components/SlideShow';
 
 export default function PokemonItem() {
   const location = useLocation();
@@ -17,24 +19,28 @@ export default function PokemonItem() {
       .then((data) => setPoke(data));
   }
 
-  const imageArray = [];
-  function imagePusher(images) {
-    Object.entries(images).map(([key, value]) => {
-      if (typeof value === 'object' && value !== null) {
-        return imagePusher(value);
-      } else if (value === null) {
-        return;
-      }
-      return imageArray.push({ key, value });
-    });
-  }
+  const [imageArray, setImageArray] = useState([]);
 
-  // imagePusher(poke.sprites);
+  useEffect(() => {
+    function imagePusher(images) {
+      Object.entries(images).map(([key, value]) => {
+        if (typeof value === 'object' && value !== null) {
+          return imagePusher(value);
+        } else if (value === null) {
+          return;
+        }
+        return setImageArray((prev) => [...prev, { key, value }]);
+      });
+    }
+
+    imagePusher(poke.sprites);
+  }, []);
+  console.log();
 
   return (
     <>
       <div>
-        <img src={poke.sprites.front_default} alt="pokemons image" />
+        <SlideShow images={imageArray} />
         <p>{poke.name}</p>
         <ul>
           {poke.stats.map((stat) => (
