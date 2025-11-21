@@ -123,6 +123,8 @@ export default function PokemonList() {
         );
         setTrigger(crypto.randomUUID());
       }
+
+      setVisibleCount(31);
     },
     [masterPokemonList]
   );
