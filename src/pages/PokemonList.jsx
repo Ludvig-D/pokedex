@@ -67,6 +67,7 @@ export default function PokemonList() {
       setCurrentList(() => hiddenList.slice(0, visibleCount));
     }
     increaseCurrentList();
+    console.log(hiddenList);
   }, [hiddenList, visibleCount, trigger]);
 
   function increase() {
@@ -74,21 +75,61 @@ export default function PokemonList() {
     setVisibleCount((prev) => prev + 6);
   }
 
-  const whatShows = useCallback((value) => {
-    if (value === 'ascending') {
-      setHiddenList((prev) => prev.sort((a, b) => a - b));
-      setTrigger(crypto.randomUUID());
-    } else if (value === 'descending') {
-      setHiddenList((prev) => {
-        return prev.sort((a, b) => parseInt(b) - parseInt(a));
-      });
-      setTrigger(crypto.randomUUID());
-    }
-  }, []);
+  const filter = useCallback(
+    (value) => {
+      if (value === 'ascending') {
+        setHiddenList((prev) => prev.sort((a, b) => a - b));
+        setTrigger(crypto.randomUUID());
+      } else if (value === 'descending') {
+        setHiddenList((prev) => {
+          return prev.sort((a, b) => b - a);
+        });
+        setTrigger(crypto.randomUUID());
+      } else if (value === 'az') {
+        const sortedArr = masterPokemonList
+          .sort((a, b) => {
+            const nameA = a.name.toUpperCase();
+            const nameB = b.name.toUpperCase();
+
+            if (nameA < nameB) return -1;
+            if (nameA > nameB) return 1;
+
+            return 0;
+          })
+          .map((item) => item.id);
+
+        setHiddenList((prev) =>
+          prev.sort((a, b) => {
+            return sortedArr.indexOf(a) - sortedArr.indexOf(b);
+          })
+        );
+        setTrigger(crypto.randomUUID());
+      } else if (value === 'za') {
+        const sortedArr = masterPokemonList
+          .sort((a, b) => {
+            const nameA = a.name.toUpperCase();
+            const nameB = b.name.toUpperCase();
+
+            if (nameA > nameB) return -1;
+            if (nameA < nameB) return 1;
+
+            return 0;
+          })
+          .map((item) => item.id);
+        setHiddenList((prev) =>
+          prev.sort((a, b) => {
+            return sortedArr.indexOf(a) - sortedArr.indexOf(b);
+          })
+        );
+        setTrigger(crypto.randomUUID());
+      }
+    },
+    [masterPokemonList]
+  );
 
   return (
     <>
-      <PokemonListBar whatshows={whatShows} />
+      <PokemonListBar filter={filter} />
       <ul>
         <InfiniteScroll
           dataLength={currentList.length}
