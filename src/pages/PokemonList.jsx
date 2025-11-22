@@ -8,6 +8,7 @@ import PokemonListBar from '../components/PokemonListBar';
 
 export default function PokemonList() {
   const [masterPokemonList, setMasterPokemonList] = useState([]);
+  const [masterTypeList, setMasterTypeList] = useState([]);
   const [detailedPokemonList, setDetailedPokemonList] = useState([]);
   const [visibleCount, setVisibleCount] = useState(31);
   const [currentList, setCurrentList] = useState([]);
@@ -18,13 +19,13 @@ export default function PokemonList() {
 
   //Todo
   //1. Style pokemon item
-  //2. Finish up photo slide show
+  //2. Sort by types
 
   useEffect(() => {
     if (hasFetched.current) return;
     hasFetched.current = true;
 
-    function createMasterList() {
+    (function fetchPokemons() {
       fetch('https://pokeapi.co/api/v2/pokemon?limit=1328&offset=0')
         .then((response) => response.json())
         .then((allData) => {
@@ -35,8 +36,15 @@ export default function PokemonList() {
           });
         })
         .catch((err) => console.error(err));
-    }
-    createMasterList();
+    })();
+
+    (function fetchTypes() {
+      fetch('https://pokeapi.co/api/v2/type?limit=18')
+        .then((res) => res.json())
+        .then((data) =>
+          setMasterTypeList((prev) => [...prev, ...data.results])
+        );
+    })();
   }, []);
 
   useEffect(() => {
@@ -63,7 +71,6 @@ export default function PokemonList() {
       setCurrentList(() => hiddenList.slice(0, visibleCount));
     }
     increaseCurrentList();
-    console.log(hiddenList);
   }, [hiddenList, visibleCount, trigger]);
 
   function increase() {
@@ -71,7 +78,7 @@ export default function PokemonList() {
     setVisibleCount((prev) => prev + 6);
   }
 
-  const filter = useCallback(
+  const sort = useCallback(
     (value) => {
       if (value === 'ascending') {
         setHiddenList((prev) => prev.sort((a, b) => a - b));
@@ -125,9 +132,23 @@ export default function PokemonList() {
     [masterPokemonList]
   );
 
+  const filter = useCallback(
+    (value) => {
+      if (value === 'default') return;
+
+      masterTypeList.map((type) => {
+        if (type.name === value) console.log(type);
+
+        return;
+      });
+      console.log(value);
+    },
+    [masterTypeList]
+  );
+
   return (
     <>
-      <PokemonListBar filter={filter} />
+      <PokemonListBar sort={sort} filter={filter} types={masterTypeList} />
       <ul>
         <InfiniteScroll
           dataLength={currentList.length}
