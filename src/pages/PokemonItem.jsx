@@ -34,7 +34,7 @@ export default function PokemonItem() {
     }
 
     imagePusher(poke.sprites);
-  }, []);
+  }, [poke.sprites]);
 
   return (
     <>
