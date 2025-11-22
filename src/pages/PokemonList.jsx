@@ -21,6 +21,7 @@ export default function PokemonList() {
   const [filter, setFilter] = useState('default');
 
   const [trigger, setTrigger] = useState('');
+  const [sortTrigger, setSortTrigger] = useState('');
 
   const hasFetched = useRef(false);
 
@@ -107,6 +108,7 @@ export default function PokemonList() {
       arr.push(id);
     });
     setHiddenList(arr);
+    setSortTrigger(crypto.randomUUID());
   }, [detailedTypeList, filter]);
 
   useEffect(() => {
@@ -159,7 +161,7 @@ export default function PokemonList() {
     console.log('sorted');
 
     setVisibleCount(31);
-  }, [masterPokemonList, sort, filter]);
+  }, [masterPokemonList, sort, sortTrigger]);
 
   const updateSort = (value) => {
     setSort(value);
