@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import '../css/SlideShow.css';
 
 export default function SlideShow({ images }) {
-  const [currentIndex, setCurrentIndex] = useState(8);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToNextSlide = () => {
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
@@ -21,28 +21,30 @@ export default function SlideShow({ images }) {
 
   return (
     <div id="slide-div">
-      {images[currentIndex] != undefined && (
+      {images[currentIndex] != undefined ? (
         <>
-          <p>
-            {currentIndex} of {images.length}
+          <p id="index">
+            {currentIndex + 1} of {images.length + 1}
           </p>
           <img
             id="slide-image"
             src={images[currentIndex].value}
             alt={`pokemon slide ${currentIndex}`}
           />
+          <div className="button-div">
+            <button id="left" onClick={goToPrevSlide}>
+              {' '}
+              {'<'}{' '}
+            </button>
+            <button id="right" onClick={goToNextSlide}>
+              {' '}
+              {'>'}{' '}
+            </button>
+          </div>
         </>
+      ) : (
+        <p id="no-img">No images</p>
       )}
-      <div className="button-div">
-        <button id="left" onClick={goToPrevSlide}>
-          {' '}
-          {'<'}{' '}
-        </button>
-        <button id="right" onClick={goToNextSlide}>
-          {' '}
-          {'>'}{' '}
-        </button>
-      </div>
     </div>
   );
 }

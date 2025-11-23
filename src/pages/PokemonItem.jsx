@@ -2,6 +2,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import '../css/icons.css';
+import '../css/PokemonItem.css';
 
 import SlideShow from '../components/SlideShow';
 
@@ -36,31 +37,53 @@ export default function PokemonItem() {
     imagePusher(poke.sprites);
   }, [poke.sprites]);
 
+  function roundUp(num, precision) {
+    precision = Math.pow(10, precision);
+    return Math.ceil(num * precision) / precision;
+  }
+
   return (
     <>
-      <div>
+      <div className="pokemon-div">
         <SlideShow images={imageArray} />
-        <p>{poke.name}</p>
-        <ul>
-          {poke.stats.map((stat) => (
-            <li key={stat.stat.name}>
-              {stat.base_stat} {stat.stat.name}
-            </li>
-          ))}
-          <li key={poke.weight}>
-            Weight {poke.weight / 10} kg ({(poke.weight / 10) * 2.205} lbs)
-          </li>
-          <li key={poke.height}>
-            Height {poke.height / 10} m ({(poke.height / 10) * 3.28} inches)
-          </li>
-        </ul>
-        <ul>
-          {poke.types.map((type) => (
-            <li className={`type-icon type-${type.type.name}`} key={type.slot}>
-              {type.type.name}
-            </li>
-          ))}
-        </ul>
+        <div id="stat-container">
+          <p id="pokemon-Name">{poke.name}</p>
+
+          <div id="tpye-div">
+            <p>Types</p>
+            <ul id="type-list">
+              {poke.types.map((type) => (
+                <li
+                  className={`type-icon type-${type.type.name}`}
+                  key={type.slot}
+                >
+                  {type.type.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div id="stat-div">
+            <p>Stats</p>
+            <ul id="stat-ul">
+              {poke.stats.map((stat) => (
+                <li key={stat.stat.name}>
+                  {stat.base_stat} <span>{stat.stat.name}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p key={poke.weight}>
+              <span className="whSpan">Weight:</span> {poke.weight / 10} kg (
+              {roundUp((poke.weight / 10) * 2.205, 1)} lbs)
+            </p>
+            <p key={poke.height}>
+              <span className="whSpan">Height:</span> {poke.height / 10} m (
+              {roundUp((poke.height / 10) * 3.28, 1)} inches)
+            </p>
+          </div>
+        </div>
       </div>
     </>
   );

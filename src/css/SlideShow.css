@@ -27,12 +27,22 @@ button {
   top: 14rem;
   gap: 15rem;
 }
-p {
+
+#index {
   text-align: center;
 }
 
 #slide-div {
-  background-color: #2d3032;
-  padding: 1rem 2rem;
+  padding: 1rem 0;
   border-radius: 15px;
+
+  min-width: 20rem;
+}
+
+#no-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-weight: bold;
 }

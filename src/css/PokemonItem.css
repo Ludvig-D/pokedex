@@ -1,0 +1,47 @@
+.pokemon-div {
+  display: flex;
+  padding: 2rem;
+  background-color: #2d3032;
+  border-radius: 15px;
+  border: 1px solid #776f62;
+}
+
+#pokemon-Name {
+  text-transform: capitalize;
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+
+#type-list {
+  display: flex;
+  gap: 0.5rem;
+}
+
+#stat-ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+span {
+  text-transform: capitalize;
+}
+
+#stat-container {
+  padding-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#stat-div p {
+  font-weight: bold;
+}
+
+.whSpan {
+  font-weight: bold;
+}
+
+#tpye-div {
+  font-weight: bold;
+}
