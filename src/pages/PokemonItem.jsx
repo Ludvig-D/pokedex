@@ -49,7 +49,11 @@ export default function PokemonItem() {
 
   return (
     <>
-      <button onClick={navigateBackToPokemons}>Back</button>
+      <div id="btnDiv">
+        <button id="backBtn" onClick={navigateBackToPokemons}>
+          {'<-- Back'}
+        </button>
+      </div>
       <div className="pokemon-div">
         <SlideShow images={imageArray} />
         <div id="stat-container">

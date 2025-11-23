@@ -45,3 +45,20 @@ span {
 #tpye-div {
   font-weight: bold;
 }
+
+#backBtn {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #2d3032;
+  border: 2px solid #444a4d;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#btnDiv {
+  display: flex;
+  justify-content: left;
+  width: 100%;
+  padding-left: 1rem;
+}
