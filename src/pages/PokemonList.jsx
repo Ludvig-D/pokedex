@@ -1,5 +1,5 @@
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import '../css/PokemonList.css';
 
@@ -24,10 +24,6 @@ export default function PokemonList() {
   const [sortTrigger, setSortTrigger] = useState('');
 
   const hasFetched = useRef(false);
-
-  //Todo
-  //1. Style pokemon item
-  //2. Sort by types
 
   useEffect(() => {
     if (hasFetched.current) return;

@@ -1,4 +1,4 @@
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import '../css/icons.css';
@@ -42,8 +42,14 @@ export default function PokemonItem() {
     return Math.ceil(num * precision) / precision;
   }
 
+  const navigate = useNavigate();
+  function navigateBackToPokemons() {
+    navigate('/pokemons');
+  }
+
   return (
     <>
+      <button onClick={navigateBackToPokemons}>Back</button>
       <div className="pokemon-div">
         <SlideShow images={imageArray} />
         <div id="stat-container">

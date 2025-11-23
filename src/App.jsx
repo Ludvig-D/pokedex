@@ -1,4 +1,4 @@
-import { Routes, Route, NavLink, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, BrowserRouter, NavLink } from 'react-router-dom';
 
 import './css/App.css';
 import PokemonList from './pages/PokemonList';
@@ -8,12 +8,10 @@ import HomePage from './components/HomePage';
 function App() {
   return (
     <>
-      <h1>Pokedex</h1>
       <BrowserRouter>
-        <nav>
-          <NavLink to={'/'}>Home</NavLink>
-          <NavLink to={'pokemons'}>All pokemons</NavLink>
-        </nav>
+        <NavLink id="navLink" to={'/'}>
+          Pokedex
+        </NavLink>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="pokemons" element={<PokemonList />} />

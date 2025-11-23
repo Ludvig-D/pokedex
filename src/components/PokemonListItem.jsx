@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 export default function PokemonListItem({ pokemon }) {
   const navigate = useNavigate();
   const toNextComponent = () => {
-    navigate(`./${pokemon.id}`, { state: { pokemon: pokemon } });
+    navigate(`/pokemons/${pokemon.id}`, { state: { pokemon: pokemon } });
   };
 
   return (
