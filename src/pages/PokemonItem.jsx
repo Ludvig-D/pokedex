@@ -86,7 +86,7 @@ export default function PokemonItem() {
             </p>
             <p key={poke.height}>
               <span className="whSpan">Height:</span> {poke.height / 10} m (
-              {roundUp((poke.height / 10) * 3.28, 1)} inches)
+              {roundUp((poke.height / 10) * 3.28, 1)} feet)
             </p>
           </div>
         </div>
