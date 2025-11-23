@@ -17,7 +17,7 @@ export default function SlideShow({ images }) {
     const intervalId = setInterval(goToNextSlide, 5000);
 
     return () => clearInterval(intervalId);
-  }, [images.length]);
+  }, [images.length, goToNextSlide]);
 
   return (
     <div id="slide-div">
@@ -32,11 +32,11 @@ export default function SlideShow({ images }) {
             alt={`pokemon slide ${currentIndex}`}
           />
           <div className="button-div">
-            <button id="left" onClick={goToPrevSlide}>
+            <button className="slideBtn" id="left" onClick={goToPrevSlide}>
               {' '}
               {'<'}{' '}
             </button>
-            <button id="right" onClick={goToNextSlide}>
+            <button className="slideBtn" id="right" onClick={goToNextSlide}>
               {' '}
               {'>'}{' '}
             </button>
