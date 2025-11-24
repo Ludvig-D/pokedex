@@ -3,7 +3,7 @@ import { Routes, Route, BrowserRouter, NavLink } from 'react-router-dom';
 import './css/App.css';
 import PokemonList from './pages/PokemonList';
 import PokemonItem from './pages/PokemonItem';
-import HomePage from './components/HomePage';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (

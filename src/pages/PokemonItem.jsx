@@ -5,6 +5,7 @@ import '../css/icons.css';
 import '../css/PokemonItem.css';
 
 import SlideShow from '../components/SlideShow';
+import Header from '../components/Header';
 
 export default function PokemonItem() {
   const location = useLocation();
@@ -49,6 +50,7 @@ export default function PokemonItem() {
 
   return (
     <>
+      <Header />
       <div id="btnDiv">
         <button id="backBtn" onClick={navigateBackToPokemons}>
           {'<-- Back'}

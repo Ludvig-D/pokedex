@@ -5,6 +5,8 @@ import '../css/PokemonList.css';
 
 import PokemonListItem from '../components/PokemonListItem';
 import PokemonListBar from '../components/PokemonListBar';
+import { useNavigate } from 'react-router-dom';
+import Header from '../components/Header';
 
 export default function PokemonList() {
   const [masterPokemonList, setMasterPokemonList] = useState([]);
@@ -169,6 +171,7 @@ export default function PokemonList() {
 
   return (
     <>
+      <Header />
       <PokemonListBar
         sort={updateSort}
         filter={updateFilter}
