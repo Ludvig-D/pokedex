@@ -1,7 +1,5 @@
 .custom-select {
-  background-color: red;
-  appearance: none;
-  color: green;
   padding: 1rem;
-  border: 1px solid purple;
+  display: flex;
+  gap: 1rem;
 }
