@@ -9,9 +9,6 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <NavLink id="navLink" to={'/'}>
-          Pokedex
-        </NavLink>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="pokemons" element={<PokemonList />} />

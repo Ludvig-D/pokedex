@@ -1,0 +1,40 @@
+#navBtn {
+  padding: 1rem 2rem;
+  font-weight: bold;
+  font-size: 1rem;
+  background-color: #3c83f6;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+}
+
+#navBtn:hover {
+  background-color: #3675db;
+}
+
+#welcomeText {
+  font-size: 4rem;
+}
+
+#infoText {
+  width: 50%;
+  text-align: center;
+  color: #acacac;
+  font-size: 1.2rem;
+}
+
+#homeDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 9rem;
+}
+
+#homeContainer {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
