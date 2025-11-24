@@ -1,7 +1,7 @@
+import '../css/PokemonListBar.css';
 export default function PokemonListBar({ sort, filter, types }) {
   return (
-    <div>
-      <p>search</p>
+    <div className="custom-select">
       <select
         defaultValue={'default'}
         name="type"
@@ -15,7 +15,12 @@ export default function PokemonListBar({ sort, filter, types }) {
           </option>
         ))}
       </select>
-      <select defaultValue={'accending'} onChange={(e) => sort(e.target.value)}>
+      <select
+        name="order"
+        id="order"
+        defaultValue={'accending'}
+        onChange={(e) => sort(e.target.value)}
+      >
         <option value="ascending">Ascending ids</option>
         <option value="descending">Descending ids</option>
         <option value="az">A-Z</option>
