@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import TypeIcons from './TypeIcons/TypeIcons';
 
 export default function PokemonListItem({ pokemon }) {
   const navigate = useNavigate();
@@ -12,16 +13,7 @@ export default function PokemonListItem({ pokemon }) {
         <>
           <div className="top-div">
             <p className="id">{pokemon.id}</p>
-            <div className="icon-div">
-              {pokemon.types.map((type) => (
-                <p
-                  key={type.slot}
-                  className={`type-icon type-${type.type.name}`}
-                >
-                  {type.type.name}
-                </p>
-              ))}
-            </div>
+            <TypeIcons types={pokemon.types} />
           </div>
           <img
             src={pokemon.sprites.front_default}

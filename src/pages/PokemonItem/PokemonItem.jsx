@@ -1,11 +1,11 @@
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-import '../../css/icons.css';
 import './PokemonItem.css';
 
 import SlideShow from '../../components/SlideShow/SlideShow';
 import Header from '../../components/Header/Header';
+import TypeIcons from '../../components/TypeIcons/TypeIcons';
 
 export default function PokemonItem() {
   const location = useLocation();
@@ -61,19 +61,7 @@ export default function PokemonItem() {
         <div id="stat-container">
           <p id="pokemon-Name">{poke.name}</p>
 
-          <div id="tpye-div">
-            <p>Types</p>
-            <ul id="type-list">
-              {poke.types.map((type) => (
-                <li
-                  className={`type-icon type-${type.type.name}`}
-                  key={type.slot}
-                >
-                  {type.type.name}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <TypeIcons types={poke.types} />
 
           <div id="stat-div">
             <p>Stats</p>

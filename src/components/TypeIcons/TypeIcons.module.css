@@ -1,10 +1,15 @@
-.type-icon {
+.typeDiv {
+  display: flex;
+}
+
+.typeIcon {
   padding: 0.1rem 0.5rem;
   border-radius: 5px;
   text-transform: uppercase;
+  font-weight: bold;
 }
 
-.type-icon:hover {
+.typeIcon:hover {
   opacity: 0.75;
   cursor: pointer;
 }

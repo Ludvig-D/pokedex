@@ -12,11 +12,6 @@
   font-size: 1.8rem;
 }
 
-#type-list {
-  display: flex;
-  gap: 0.5rem;
-}
-
 #stat-ul {
   display: flex;
   flex-direction: column;
@@ -39,10 +34,6 @@ span {
 }
 
 .whSpan {
-  font-weight: bold;
-}
-
-#tpye-div {
   font-weight: bold;
 }
 
