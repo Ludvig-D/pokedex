@@ -1,7 +1,7 @@
-import './PokemonListBar.css';
+import styles from './PokemonListBar.module.css';
 export default function PokemonListBar({ updateSort, updateFilter, types }) {
   return (
-    <div className="custom-select">
+    <div className={styles.customSelect}>
       <div>
         <p>Filter</p>
         <select

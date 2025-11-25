@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import './Header.css';
+import styles from './Header.module.css';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -8,7 +8,7 @@ export default function Header() {
     navigate('/');
   }
   return (
-    <h1 id="header" onClick={navToHomePage}>
+    <h1 id={styles.header} onClick={navToHomePage}>
       Pokèdex
     </h1>
   );

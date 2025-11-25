@@ -1,4 +1,4 @@
-#slide-image {
+#slideImage {
   width: 20rem;
   height: 20rem;
 }
@@ -20,7 +20,7 @@
   border-bottom-right-radius: 5px;
 }
 
-.button-div {
+.buttonDiv {
   display: flex;
   justify-content: space-between;
   z-index: 1;
@@ -33,14 +33,14 @@
   text-align: center;
 }
 
-#slide-div {
+#slideDiv {
   padding: 1rem 0;
   border-radius: 15px;
 
   min-width: 20rem;
 }
 
-#no-img {
+#noImg {
   display: flex;
   justify-content: center;
   align-items: center;

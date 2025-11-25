@@ -1,9 +1,9 @@
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useState, useEffect, useRef } from 'react';
 
-import './PokemonList.css';
+import styles from './PokemonList.module.css';
 
-import PokemonListItem from '../../components/PokemonListItem';
+import PokemonListItem from '../../components/PokemonListItem/PokemonListItem';
 import PokemonListBar from '../../components/PokemonListBar/PokemonListBar';
 import Header from '../../components/Header/Header';
 
@@ -173,11 +173,11 @@ export default function PokemonList() {
         updateFilter={updateFilter}
         types={masterTypeList}
       />
-      <ul>
+      <ul id={styles.pokemonList}>
         <InfiniteScroll
           dataLength={currentList.length}
           next={increase}
-          className="infi"
+          className={styles.infi}
           hasMore={true}
           loader={<h4>Loading...</h4>}
         >

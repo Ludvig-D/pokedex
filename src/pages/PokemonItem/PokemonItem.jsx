@@ -1,7 +1,7 @@
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-import './PokemonItem.css';
+import styles from './PokemonItem.module.css';
 
 import SlideShow from '../../components/SlideShow/SlideShow';
 import Header from '../../components/Header/Header';
@@ -51,36 +51,35 @@ export default function PokemonItem() {
   return (
     <>
       <Header />
-      <div id="btnDiv">
-        <button id="backBtn" onClick={navigateBackToPokemons}>
+      <div id={styles.btnDiv}>
+        <button id={styles.backBtn} onClick={navigateBackToPokemons}>
           {'<-- Back'}
         </button>
       </div>
-      <div className="pokemon-div">
+      <div className={styles.pokemonDiv}>
         <SlideShow images={imageArray} />
-        <div id="stat-container">
-          <p id="pokemon-Name">{poke.name}</p>
-
+        <div id={styles.statContainer}>
+          <p id={styles.pokemonName}>{poke.name}</p>
           <TypeIcons types={poke.types} />
-
-          <div id="stat-div">
+          <div id={styles.statDiv}>
             <p>Stats</p>
-            <ul id="stat-ul">
+            <ul id={styles.statUl}>
               {poke.stats.map((stat) => (
                 <li key={stat.stat.name}>
-                  {stat.base_stat} <span>{stat.stat.name}</span>
+                  {stat.base_stat}{' '}
+                  <span className={styles.capilzeSpan}>{stat.stat.name}</span>
                 </li>
               ))}
             </ul>
           </div>
           <div>
             <p key={poke.weight}>
-              <span className="whSpan">Weight:</span> {poke.weight / 10} kg (
-              {roundUp((poke.weight / 10) * 2.205, 1)} lbs)
+              <span className={styles.whSpan}>Weight:</span> {poke.weight / 10}{' '}
+              kg ({roundUp((poke.weight / 10) * 2.205, 1)} lbs)
             </p>
             <p key={poke.height}>
-              <span className="whSpan">Height:</span> {poke.height / 10} m (
-              {roundUp((poke.height / 10) * 3.28, 1)} feet)
+              <span className={styles.whSpan}>Height:</span> {poke.height / 10}{' '}
+              m ({roundUp((poke.height / 10) * 3.28, 1)} feet)
             </p>
           </div>
         </div>
