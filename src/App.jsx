@@ -1,9 +1,9 @@
-import { Routes, Route, BrowserRouter, NavLink } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
-import './css/App.css';
-import PokemonList from './pages/PokemonList';
-import PokemonItem from './pages/PokemonItem';
-import HomePage from './pages/HomePage';
+import './App.css';
+import PokemonList from './pages/PokemonList/PokemonList';
+import PokemonItem from './pages/PokemonItem/PokemonItem';
+import HomePage from './pages/Home/HomePage';
 
 function App() {
   return (

@@ -1,4 +1,4 @@
-import '../css/PokemonListBar.css';
+import './PokemonListBar.css';
 export default function PokemonListBar({ updateSort, updateFilter, types }) {
   return (
     <div className="custom-select">

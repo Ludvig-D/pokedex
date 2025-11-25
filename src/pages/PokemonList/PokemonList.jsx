@@ -1,11 +1,11 @@
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useState, useEffect, useRef } from 'react';
 
-import '../css/PokemonList.css';
+import './PokemonList.css';
 
-import PokemonListItem from '../components/PokemonListItem';
-import PokemonListBar from '../components/PokemonListBar';
-import Header from '../components/Header';
+import PokemonListItem from '../../components/PokemonListItem';
+import PokemonListBar from '../../components/PokemonListBar/PokemonListBar';
+import Header from '../../components/Header/Header';
 
 export default function PokemonList() {
   const [masterPokemonList, setMasterPokemonList] = useState([]);
@@ -92,8 +92,6 @@ export default function PokemonList() {
       }
       return;
     });
-
-    console.log(filter);
   }, [masterTypeList, masterPokemonList, detailedTypeList, filter]);
 
   useEffect(() => {
@@ -155,7 +153,6 @@ export default function PokemonList() {
       );
       setTrigger(crypto.randomUUID());
     }
-    console.log('sorted');
 
     setVisibleCount(31);
   }, [masterPokemonList, sort, sortTrigger]);

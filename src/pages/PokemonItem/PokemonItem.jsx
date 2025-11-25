@@ -1,11 +1,11 @@
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-import '../css/icons.css';
-import '../css/PokemonItem.css';
+import '../../css/icons.css';
+import './PokemonItem.css';
 
-import SlideShow from '../components/SlideShow';
-import Header from '../components/Header';
+import SlideShow from '../../components/SlideShow/SlideShow';
+import Header from '../../components/Header/Header';
 
 export default function PokemonItem() {
   const location = useLocation();
