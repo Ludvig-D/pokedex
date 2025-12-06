@@ -21,7 +21,6 @@ export default function PokemonList() {
   const [sort, setSort] = useState('ascending');
   const [filter, setFilter] = useState('default');
 
-  const [trigger, setTrigger] = useState('');
   const [sortTrigger, setSortTrigger] = useState('');
 
   const hasFetched = useRef(false);
@@ -70,7 +69,7 @@ export default function PokemonList() {
       setCurrentList(() => hiddenList.slice(0, visibleCount));
     }
     increaseCurrentList();
-  }, [hiddenList, visibleCount, trigger]);
+  }, [hiddenList, visibleCount]);
 
   function increase() {
     if (currentList.length > visibleCount) return;
@@ -108,13 +107,9 @@ export default function PokemonList() {
 
   useEffect(() => {
     if (sort === 'ascending') {
-      setHiddenList((prev) => prev.sort((a, b) => a - b));
-      setTrigger(crypto.randomUUID());
+      setHiddenList((prev) => [...prev].sort((a, b) => a - b));
     } else if (sort === 'descending') {
-      setHiddenList((prev) => {
-        return prev.sort((a, b) => b - a);
-      });
-      setTrigger(crypto.randomUUID());
+      setHiddenList((prev) => [...prev].sort((a, b) => b - a));
     } else if (sort === 'az') {
       const sortedArr = masterPokemonList
         .sort((a, b) => {
@@ -129,29 +124,28 @@ export default function PokemonList() {
         .map((item) => item.id);
 
       setHiddenList((prev) =>
-        prev.sort((a, b) => {
+        [...prev].sort((a, b) => {
           return sortedArr.indexOf(a) - sortedArr.indexOf(b);
         })
       );
-      setTrigger(crypto.randomUUID());
     } else if (sort === 'za') {
       const sortedArr = masterPokemonList
         .sort((a, b) => {
           const nameA = a.name.toUpperCase();
           const nameB = b.name.toUpperCase();
 
-          if (nameA > nameB) return -1;
-          if (nameA < nameB) return 1;
+          if (nameA < nameB) return -1;
+          if (nameA > nameB) return 1;
 
           return 0;
         })
         .map((item) => item.id);
+
       setHiddenList((prev) =>
-        prev.sort((a, b) => {
-          return sortedArr.indexOf(a) - sortedArr.indexOf(b);
+        [...prev].sort((a, b) => {
+          return sortedArr.indexOf(b) - sortedArr.indexOf(a);
         })
       );
-      setTrigger(crypto.randomUUID());
     }
 
     setVisibleCount(31);

@@ -1,7 +1,6 @@
 import styles from './TypeIcons.module.css';
 
 export default function TypeIcons({ types }) {
-  console.log(`type-${types[0].type.name}`);
   return (
     <>
       {types != undefined && (
